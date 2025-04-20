@@ -7,3 +7,5 @@ class Transaction:
         if key == 'Post Date':
             key = 'PostDate'    
         setattr(self, key, value)
+
+
