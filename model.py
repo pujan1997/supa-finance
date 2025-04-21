@@ -1,4 +1,7 @@
-class Transaction:
+from pydantic import BaseModel
+import datetime
+
+class TransactionCSV:
    def __init__(self, dictionary):
        for key,value in dictionary.items():
               # Check if the value is a list or dictionary
@@ -8,4 +11,14 @@ class Transaction:
             key = 'PostDate'    
         setattr(self, key, value)
 
-
+class Transaction(BaseModel):
+    transaction_date: datetime.date
+    post_date: datetime.date
+    amount: float
+    type: str
+    description: str = None
+    category: str = None
+    memo: str = None
+     
+    class Config:
+        orm_mode = True  # Enable ORM mode to allow Pydantic to work with ORM models directly
